@@ -119,11 +119,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/05/make-pan-with-cloudflare/">如何用Cloudflare Worker和Onedrive制作一个简易图床？</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <hr>
-<hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本站放图片用的图床就是使用这个技术的。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本站放图片用的图床就是使用这个技术的。</p>
 <h1 id="准备材料"><a href="#准备材料" class="headerlink" title="准备材料"></a>准备材料</h1><p>1.一个永久的Office 365订阅(推荐Enterprice版)<br>2.Cloudflare账号<br>3.一个域名(如果需要的话)</p>
 <h1 id="第一部分-创建应用"><a href="#第一部分-创建应用" class="headerlink" title="第一部分:创建应用"></a>第一部分:创建应用</h1><h2 id="第一步-登录Azure-Active-Directory-admin-center"><a href="#第一步-登录Azure-Active-Directory-admin-center" class="headerlink" title="第一步:登录Azure Active Directory admin center"></a>第一步:登录<a target="_blank" rel="noopener" href="https://aad.portal.azure.com/" title="Azure Active Directory admin center">Azure Active Directory admin center</a></h2><h2 id="第二步-创建应用"><a href="#第二步-创建应用" class="headerlink" title="第二步:创建应用"></a>第二步:创建应用</h2><h4 id="首先我们进入注册应用程序页面"><a href="#首先我们进入注册应用程序页面" class="headerlink" title="首先我们进入注册应用程序页面"></a>首先我们进入<a target="_blank" rel="noopener" href="https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps" title="注册应用程序页面">注册应用程序页面</a></h4><h4 id="然后点击顶上的新注册，然后名称随便填-受支持的用户类型选第三个，重定向URI填https-heymind-github-io-tools-microsoft-graph-api-auth-然后点击下方的注册"><a href="#然后点击顶上的新注册，然后名称随便填-受支持的用户类型选第三个，重定向URI填https-heymind-github-io-tools-microsoft-graph-api-auth-然后点击下方的注册" class="headerlink" title="然后点击顶上的新注册，然后名称随便填,受支持的用户类型选第三个，重定向URI填https://heymind.github.io/tools/microsoft-graph-api-auth ,然后点击下方的注册"></a>然后点击顶上的新注册，然后名称随便填,受支持的用户类型选第三个，重定向URI填<a target="_blank" rel="noopener" href="https://heymind.github.io/tools/microsoft-graph-api-auth">https://heymind.github.io/tools/microsoft-graph-api-auth</a> ,然后点击下方的注册</h4><p><a target="_blank" rel="noopener" href="https://image.redball1017.cf/make-pan-with-cloudflare/image1.jpg"><img src="https://image.redball1017.cf/make-pan-with-cloudflare/image1.jpg"></a></p>
 <h4 id="然后我们要记住我们获取的应用程序-客户端-ID（创建完成后就会显示）和密码"><a href="#然后我们要记住我们获取的应用程序-客户端-ID（创建完成后就会显示）和密码" class="headerlink" title="然后我们要记住我们获取的应用程序(客户端) ID（创建完成后就会显示）和密码"></a>然后我们要记住我们获取的应用程序(客户端) ID（创建完成后就会显示）和密码</h4><h2 id="第三步-获取应用程序-客户端-ID和密码"><a href="#第三步-获取应用程序-客户端-ID和密码" class="headerlink" title="第三步:获取应用程序(客户端) ID和密码"></a>第三步:获取应用程序(客户端) ID和密码</h2><h4 id="应用程序-客户端-ID就在如图所示的地方"><a href="#应用程序-客户端-ID就在如图所示的地方" class="headerlink" title="应用程序(客户端) ID就在如图所示的地方"></a>应用程序(客户端) ID就在如图所示的地方</h4><p><a target="_blank" rel="noopener" href="https://image.redball1017.cf/make-pan-with-cloudflare/image2.jpg"><img src="https://image.redball1017.cf/make-pan-with-cloudflare/image2.jpg"></a></p>
@@ -520,7 +528,7 @@ function renderFolderIndex(items, isIndex) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.redball1017.ga/2021/04/05/make-pan-with-cloudflare/" data-id="ckn43njz5000188ld76mf4dbk" data-title="" class="article-share-link">Teilen</a>
+      <a data-url="https://www.redball1017.ga/2021/04/05/make-pan-with-cloudflare/" data-id="ckn43njz5000188ld76mf4dbk" data-title="如何用Cloudflare Worker和Onedrive制作一个简易图床？" class="article-share-link">Teilen</a>
       
       
       
@@ -567,7 +575,7 @@ function renderFolderIndex(items, isIndex) &#123;
           </li>
         
           <li>
-            <a href="/2021/04/05/make-pan-with-cloudflare/">(no title)</a>
+            <a href="/2021/04/05/make-pan-with-cloudflare/">如何用Cloudflare Worker和Onedrive制作一个简易图床？</a>
           </li>
         
       </ul>
