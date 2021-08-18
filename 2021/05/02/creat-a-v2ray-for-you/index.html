@@ -11,7 +11,7 @@
   
   
 
-  <link rel="shortcut icon" href="https://drive.redball1017.ga/Blog/image/avatar.jpg" type="image/jpg" />
+  <link rel="shortcut icon" href="https://drive.redball1017.ga/blog/image/avatar.jpg" type="image/jpg" />
   <meta name="description" content="前言先放一个效果图给大家看">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Heroku创建一个专属于你的v2ray">
@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1629259527877">
+  <link rel="stylesheet" href="/css/style.css?v=1629262680370">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -46,7 +46,7 @@
         <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
         <div class="mdui-toolbar-spacer"></div>
         <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-        <a href="/" title="redball" class="mdui-btn mdui-btn-icon"><img src="https://drive.redball1017.ga/Blog/image/avatar.jpg" alt="redball"></a>
+        <a href="/" title="redball" class="mdui-btn mdui-btn-icon"><img src="https://drive.redball1017.ga/blog/image/avatar.jpg" alt="redball"></a>
        </div>
     </div>
   </div>
@@ -54,7 +54,7 @@
       <div class="nexmoe-drawer mdui-drawer" id="drawer">
     <div class="nexmoe-avatar mdui-ripple">
         <a href="/" title="redball">
-            <img src="https://drive.redball1017.ga/Blog/image/avatar.jpg" alt="redball" alt="redball">
+            <img src="https://drive.redball1017.ga/blog/image/avatar.jpg" alt="redball" alt="redball">
         </a>
     </div>
     <div class="nexmoe-count">
@@ -90,7 +90,7 @@
   
   <div class="nexmoe-widget-wrap">
     <div class="nexmoe-widget nexmoe-search">
-        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:blog.redball1017.ga" onsubmit="return search();">
             <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
         </form>
     </div>
@@ -179,6 +179,17 @@
         <div class="nexmoe-post">
 
   <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                
+                
+                  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E6%B3%A8%E5%86%8CHeroku%E8%B4%A6%E6%88%B7"><span class="toc-number">2.1.</span> <span class="toc-text">第一步:注册Heroku账户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E9%85%8D%E7%BD%AEv2ray"><span class="toc-number">2.2.</span> <span class="toc-text">第二步:配置v2ray</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E5%8A%A0%E9%80%9FV2ray"><span class="toc-number">2.3.</span> <span class="toc-text">第三步:加速V2ray</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%B0%8F%E6%AD%A5-%E5%88%9B%E5%BB%BAWorker"><span class="toc-number">2.3.1.</span> <span class="toc-text">第一小步:创建Worker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%B0%8F%E6%AD%A5-%E5%8A%A0%E9%80%9F"><span class="toc-number">2.3.2.</span> <span class="toc-text">第二小步:加速</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%90%8E"><span class="toc-number">3.</span> <span class="toc-text">最后</span></a></li></ol>
+                
+            </div>
+        </div>
+      </div>
     
   </div>
 
@@ -285,7 +296,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1629259527879"></script>
+<script src="/js/app.js?v=1629262680372"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
