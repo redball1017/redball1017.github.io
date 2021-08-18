@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1629259193717">
+  <link rel="stylesheet" href="/css/style.css?v=1629259527895">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -185,65 +185,6 @@
         <article>
             
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>把Onedrive映射到本地磁盘是为了节省空间，因为Onedrive自带的同步功能太烂了，看个视频都要等下好了才可以看(磁盘占用太大)，根本不能在线看(在线看只要缓存没看的部分，看了的部分会自动删除，超节省磁盘空间)。只要用了我这种方法，把Onedrive映射到本地磁盘上，就可以大大减少磁盘占用了!</p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="获取Refresh-Token"><a href="#获取Refresh-Token" class="headerlink" title="获取Refresh_Token"></a>获取Refresh_Token</h2><p>首先需要下载<a target="_blank" rel="noopener" href="https://rclone.org/downloads/">rclone</a>(如果下载速度慢可以试试这个<a target="_blank" rel="noopener" href="https://drive.redball1017.ga/blog/download/rclone-release/v1.56.0/">链接</a>，里面有很多文件，但你只需要下载适合你系统的就可以了。文件格式是“rclone-版本号-你的系统-架构”，其中，32位是386,64位是amd64，比如64位Windows就是rclone-版本号-windows-amd64)</p>
-<p>然后把里面的文件解压到你喜欢的地方，比如我就是解压在桌面上。</p>
-<p>然后打开解压出来的rclone文件夹。</p>
-<p>然后在文件夹内打开cmd(按住Shift和右键，选择在此打开命令窗口)，Linux是终端，然后输入</p>
-<p><code>rclone authorize &quot;onedrive&quot;</code></p>
-<p>这一步是为了获取MS的Refresh_Token。然后在弹出来的浏览器窗口中选择账户(这个账户的Onedrive将会被映射到本地磁盘当中)然后我们要代表组织同意，然后点”接受”(企业版和教育版才有这个为问题)</p>
-<p><img src="https://drive.redball1017.ga/blog/image/od-localdrive/image1.png"></p>
-<p>个人版会显示“讓此應用程式存取您的資訊嗎？”，这时我们点”是”即可</p>
-<p><img src="https://drive.redball1017.ga/blog/image/od-localdrive/image2.png"></p>
-<p>然后出现“Success!”之后返回cmd，复制如图高亮(也就是{“access_token”: 一直到”}”的一段)的这一段即可</p>
-<p><img src="https://drive.redball1017.ga/blog/image/od-localdrive/image3.png"></p>
-<h2 id="新建配置"><a href="#新建配置" class="headerlink" title="新建配置"></a>新建配置</h2><p>输入 <code>rclone config</code>  然后输入n</p>
-<p><code>e) Edit existing remote n) New remote d) Delete remote r) Rename remote c) Copy remote s) Set configuration password q) Quit config e/n/d/r/c/s/q&gt;n    #这里输入n</code></p>
-<p>然后在 <code>name&gt;</code>的内容随便填，后面要作为config_name(即配置名)使用。</p>
-<p>然后在 <code>Storage</code>后面输入onedrive</p>
-<p><code>Type of storage to configure. Enter a string value. Press Enter for the default (&quot;&quot;). Choose a number from below, or type in your own value  1 / 1Fichier    \ &quot;fichier&quot;  2 / Alias for an existing remote    \ &quot;alias&quot;  3 / Amazon Drive    \ &quot;amazon cloud drive&quot;  4 / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Minio, SeaweedFS, and Tencent COS    \ &quot;s3&quot;  5 / Backblaze B2    \ &quot;b2&quot;  6 / Box    \ &quot;box&quot;  7 / Cache a remote    \ &quot;cache&quot;  8 / Citrix Sharefile    \ &quot;sharefile&quot;  9 / Compress a remote    \ &quot;compress&quot; 10 / Dropbox    \ &quot;dropbox&quot; 11 / Encrypt/Decrypt a remote    \ &quot;crypt&quot; 12 / Enterprise File Fabric    \ &quot;filefabric&quot; 13 / FTP Connection    \ &quot;ftp&quot; 14 / Google Cloud Storage (this is not Google Drive)    \ &quot;google cloud storage&quot; 15 / Google Drive    \ &quot;drive&quot; 16 / Google Photos    \ &quot;google photos&quot; 17 / Hadoop distributed file system    \ &quot;hdfs&quot; 18 / Hubic    \ &quot;hubic&quot; 19 / In memory object storage system.    \ &quot;memory&quot; 20 / Jottacloud    \ &quot;jottacloud&quot; 21 / Koofr    \ &quot;koofr&quot; 22 / Local Disk    \ &quot;local&quot; 23 / Mail.ru Cloud    \ &quot;mailru&quot; 24 / Mega    \ &quot;mega&quot; 25 / Microsoft Azure Blob Storage    \ &quot;azureblob&quot; 26 / Microsoft OneDrive    \ &quot;onedrive&quot; 27 / OpenDrive    \ &quot;opendrive&quot; 28 / OpenStack Swift (Rackspace Cloud Files, Memset Memstore, OVH)    \ &quot;swift&quot; 29 / Pcloud    \ &quot;pcloud&quot; 30 / Put.io    \ &quot;putio&quot; 31 / QingCloud Object Storage    \ &quot;qingstor&quot; 32 / SSH/SFTP Connection    \ &quot;sftp&quot; 33 / Sugarsync    \ &quot;sugarsync&quot; 34 / Tardigrade Decentralized Cloud Storage    \ &quot;tardigrade&quot; 35 / Transparently chunk/split large files    \ &quot;chunker&quot; 36 / Union merges the contents of several upstream fs    \ &quot;union&quot; 37 / Uptobox    \ &quot;uptobox&quot; 38 / Webdav    \ &quot;webdav&quot; 39 / Yandex Disk    \ &quot;yandex&quot; 40 / Zoho    \ &quot;zoho&quot; 41 / http Connection    \ &quot;http&quot; 42 / premiumize.me    \ &quot;premiumizeme&quot; 43 / seafile    \ &quot;seafile&quot; Storage&gt;onedrive    #输入onedrive</code></p>
-<p>然后Client_id我们用默认的就可以了，即按Enter键</p>
-<p><code>OAuth Client Id Leave blank normally. Enter a string value. Press Enter for the default (&quot;&quot;). client_id&gt;    #按Enter键继续</code></p>
-<p>然后Client_secret我们也是用默认的，即也是按Enter键</p>
-<p><code>OAuth Client Secret Leave blank normally. Enter a string value. Press Enter for the default (&quot;&quot;). client_secret&gt;    #按Enter键继续</code></p>
-<p>然后region，国际版填global,中国世纪互联用户填cn</p>
-<p><code>Choose national cloud region for OneDrive. Enter a string value. Press Enter for the default (&quot;global&quot;). Choose a number from below, or type in your own value  1 / Microsoft Cloud Global    \ &quot;global&quot;  2 / Microsoft Cloud for US Government    \ &quot;us&quot;  3 / Microsoft Cloud Germany    \ &quot;de&quot;  4 / Azure and Office 365 operated by 21Vianet in China    \ &quot;cn&quot; region&gt;    #国际版填global，中国世纪互联填cn</code></p>
-<p>然后在 <code>y/n </code>后面输入n或按Enter键</p>
-<p><code>Edit advanced config? y) Yes n) No (default) y/n&gt;n    #输入n或按Enter键</code></p>
-<p>然后我们输入y或按Enter键</p>
-<p>`Use auto config?</p>
-<ul>
-<li><p>Say Y if not sure</p>
-</li>
-<li><p>Say N if you are working on a remote or headless machine</p>
-<p>y) Yes (default)<br>n) No<br>y/n&gt;y    输入y或按Enter键`</p>
-<p>然后他可能会让你再次登录MS账户，这时登录即可</p>
-<p>然后我们在 <code>config_type&gt;</code>后面输入onedrive</p>
-<p><code> 1 / OneDrive Personal or Business    \ &quot;onedrive&quot;  2 / Root Sharepoint site    \ &quot;sharepoint&quot;  3 / Sharepoint site name or URL (e.g. mysite or https://contoso.sharepoint.com/sites/mysite)    \ &quot;url&quot;  4 / Search for a Sharepoint site    \ &quot;search&quot;  5 / Type in driveID (advanced)    \ &quot;driveid&quot;  6 / Type in SiteID (advanced)    \ &quot;siteid&quot;  7 / Sharepoint server-relative path (advanced, e.g. /teams/hr)    \ &quot;path&quot; config_type&gt;onedrive    #输入onedrive</code></p>
-<p>然后我们在 <code>y/n&gt;</code>后面输入或者按Enter键</p>
-<p>`Drive OK?</p>
-<p>Found drive “root” of type “business”<br>URL: <a target="_blank" rel="noopener" href="https://xxx-my.sharepoint.com/personal/xxx_xxx_onmicrosoft_com/Documents">https://xxx-my.sharepoint.com/personal/xxx_xxx_onmicrosoft_com/Documents</a></p>
-<p>y) Yes (default)<br>n) No<br>y/n&gt;y    #输入y或按Enter键`</p>
-<p>然后我们在 <code>y/e/d&gt;</code>后面输入y</p>
-<p>`[example]<br>type = onedrive<br>token = {“access_token”:”xxxxx”}<br>drive_id = xxxx</p>
-<h2 id="drive-type-business"><a href="#drive-type-business" class="headerlink" title="drive_type = business"></a>drive_type = business</h2><p>y) Yes this is OK (default)<br>e) Edit this remote<br>d) Delete this remote<br>y/e/d&gt;y    输入y`</p>
-<p>然后我们输入q退出rclone</p>
-<p><code>e) Edit existing remote n) New remote d) Delete remote r) Rename remote c) Copy remote s) Set configuration password q) Quit config e/n/d/r/c/s/q&gt; q    #输入q退出rclone</code></p>
-<p>然后我们输入以下命令来挂载Onedrive</p>
-</li>
-</ul>
-<p>Windows用户</p>
-<p><code>rclone mount config_name: drive_letter: --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --vfs-cache-mode writes</code></p>
-<p>config_name就是你一开始输入的配置名,drive_letter就是要挂载在哪个盘，不要输入现在已有的盘，比如C盘,D盘</p>
-<p>Linux用户:</p>
-<p><code>rclone mount DriveName: LocalFolder --umask 0000 --default-permissions --allow-non-empty --allow-other --transfers 1 --buffer-size 64M --low-level-retries 200 &amp;</code> </p>
-<p>DriveName就是你一开始输入的配置名，LocalFolder就是你想挂载到哪个本地文件夹内(要有绝对路径!!)</p>
-<h2 id="Windows设置开机自启，cmd后台运行"><a href="#Windows设置开机自启，cmd后台运行" class="headerlink" title="Windows设置开机自启，cmd后台运行"></a>Windows设置开机自启，cmd后台运行</h2><p>首先我们按Windows微标键(即位于X键下面，Fn和左Alt之间的按键)+R键调出运行窗口，然后输入<code>%appdata%\Microsoft\Windows\Start Menu\Programs\Startup</code>进入启动文件夹</p>
-<p><img src="https://drive.redball1017.ga/blog/image/od-localdrive/image4.png"></p>
-<p>然后在这里面新建一个.txt文件然后在里面输入</p>
-<p><code>if &quot;%1&quot;==&quot;hide&quot; goto CmdBegin start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;&quot;&quot;%~0&quot;&quot; hide&quot;,0)(window.close)&amp;&amp;exit :CmdBegin cd &quot;rcloneFolder&quot; rclone mount config_name: Drive_letter: --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --vfs-cache-mode writes</code></p>
-<p><code>rcloneFolder</code>是指Rclone所在的文件夹，要完整，例如C:/example/rclone 。<code>config_name</code>就是你一开始输入的配置名，<code>Drive_letter</code>就是你想挂载到哪个盘，不要输入现在已有的盘，比如C盘,D盘，然后保存。最后把.txt重命名为.bat(记得打开显示文件扩展名!!!!!!)</p>
-
             
         </article>
     </div>
@@ -260,7 +201,7 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年08月08日</a>
-            <a><i class="nexmoefont icon-areachart"></i>232 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>229 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
@@ -268,20 +209,6 @@
             
                 <h1 id="资源下载"><a href="#资源下载" class="headerlink" title="资源下载"></a>资源下载</h1><p><a target="_blank" rel="noopener" href="https://drive.redball1017.ga/blog/download/free-minecraft-uwp.zip">点我下载</a></p>
 <p>到Microsoft Store 下载并安装Minecraft For WIndows 10试用版</p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h1><p>系统:Windows 10</p>
-<p>版本号必须高于1909</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>首先我们先下载资源</p>
-<p>然后解压zip压缩包后进入文件夹”获取管理权限”,然后双击”安装.reg”.这样你的右键菜单就会有一个选项叫做”获取管理权限”.安装这个功能是因为我们等下要替换系统文件,你没安装会提示你权限不足.</p>
-<p><img src="https://drive.redball1017.ga/blog/image/free-minecraft-uwp/image1.png"></p>
-<p><img src="https://drive.redball1017.ga/blog/image/free-minecraft-uwp/image2.png"></p>
-<p>然后我们分别获取以下两个文件的管理权限</p>
-<p>你的系统盘\Windows\System32 里面的Windows.ApplicationModel.Store.dll</p>
-<p>你的系统盘\Windows\SysWOW64 里面的Windows.ApplicationModel.Store.dll</p>
-<p>然后把解压出来的System32和SysWOW64复制粘贴到”你的系统盘\Windows里面”</p>
-<p>然后打开Minecraft For Windows 10即可游玩正版</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>阻止Minecraft向Microsoft Store索要正版信息</p>
-
             
         </article>
     </div>
@@ -298,7 +225,7 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年07月27日</a>
-            <a><i class="nexmoefont icon-areachart"></i>664 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>661 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
         </div>
 
@@ -306,39 +233,6 @@
             
                 <h1 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h1><p>一個Microsoft賬號</p>
 <p>一個電話號碼</p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="第一步-申請Microsoft-365-Devloper訂閲"><a href="#第一步-申請Microsoft-365-Devloper訂閲" class="headerlink" title="第一步:申請Microsoft 365 Devloper訂閲"></a>第一步:申請Microsoft 365 Devloper訂閲</h2><p>首先先<a target="_blank" rel="noopener" href="https://developer.microsoft.com/microsoft-365/profile">點我</a>進入申請界面</p>
-<p>登錄好後填寫一下必填信息,因爲這裏語言沒有繁體中文,所以我們要改選為簡體中文</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images1.jpg"></p>
-<p>接下來的兩個隨便選也可以</p>
-<p>完成后我們點選界面中的”设置 E5 订阅”</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images2.jpg"></p>
-<p>在彈出的窗口中填寫標注必填項的即可</p>
-<p>填寫完後稍等一會,就會顯示如下圖所示的界面,然後我們要點”轉到訂閲”進入下一步</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images4.jpg"></p>
-<h2 id="第二步-設置自動續期"><a href="#第二步-設置自動續期" class="headerlink" title="第二步:設置自動續期"></a>第二步:設置自動續期</h2><h3 id="獲取必要信息"><a href="#獲取必要信息" class="headerlink" title="獲取必要信息"></a>獲取必要信息</h3><p>首先我們要到 <a target="_blank" rel="noopener" href="http://www.office.com/?auth=2">www.office.com/?auth=2</a> 中登錄你剛剛申請的Microsoft 365開發人員訂閲賬戶</p>
-<p>登錄完成後進入<a target="_blank" rel="noopener" href="https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps">這個網站</a>,如果要求你登錄或選取賬戶,那就選取你剛剛申請的Microsoft 365開發人員訂閲賬戶.</p>
-<p>然後點擊上面的”+新增注冊”</p>
-<img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images5.jpg" style="zoom: 200%;" />
-
-<p> 然後按下圖的指引填好必填信息(名稱按你的喜好填,支援的賬戶類型選第三個,從導向URI填 <a target="_blank" rel="noopener" href="https://e5.qyi.io/outlook/auth2/receive">https://e5.qyi.io/outlook/auth2/receive</a> )后點擊下面的注冊</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images6.jpg"></p>
-<p>然後我們要保存一下識別碼,因爲我們等一下要用<img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images7.jpg" style="zoom:200%;" /></p>
-<p>然後我們點擊左側欄的憑證及祕密,然後再點擊右邊的”新增用戶端密碼”,描述隨便填,到期選24個月,然後再點擊”新增”<img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images8.jpg" style="zoom:200%;" /></p>
-<p>然後我們把值也保存一下,因爲這個等一下也要用<img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images9.jpg"></p>
-<h3 id="添加必要API"><a href="#添加必要API" class="headerlink" title="添加必要API"></a>添加必要API</h3><p>首先我們要點擊左側的API權限,然後點擊右側的新增權限,然後我們要選取的API就是Microsoft Graph<img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images10.jpg"></p>
-<p>然後再點擊委派的權限,然後我們要新增的權限分別有:Mail.Read,Mail.Read.Shared,Mail.ReadBasic,Mail.ReadWrite,Mail.ReadWrite.Shared,Mail.Send</p>
-<p>,Mail.Send.Shared 然後點擊下面的新增權限.</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images11.jpg"></p>
-<p>然後我們還要點擊代表 XXX 授予管理員同意</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images12.jpg"></p>
-<h3 id="設置自動調用API-需要一個Github賬號"><a href="#設置自動調用API-需要一個Github賬號" class="headerlink" title="設置自動調用API(需要一個Github賬號)"></a>設置自動調用API(需要一個Github賬號)</h3><p>進入<a target="_blank" rel="noopener" href="https://e5.qyi.io/login">這個界面</a>后,點擊中央的圖標進行登錄(需要Github賬號)<img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images13.jpg" style="zoom:200%;" /></p>
-<p>然後我們點擊”新建”,在彈出的窗口中,名稱按你的喜好去填,填完后點擊確定</p>
-<img src="https://drive.redball1017.ga/Blog/image/dev-office-free/images14.jpg" style="zoom:200%;" />
-
-<p>然後我們點擊”配置”,在彈出的窗口中,Client_id填你剛剛複製的識別碼,client_secret填你剛剛保存的用戶端密碼的值,填完後點擊下一步,然後就默認就可以了.</p>
-<p>注意:這裏的子賬號是指你剛剛申請的Microsoft 365開發人員訂閲賬戶.</p>
-<h1 id="本篇文章結束"><a href="#本篇文章結束" class="headerlink" title="本篇文章結束"></a>本篇文章結束</h1>
             
         </article>
     </div>
@@ -355,29 +249,13 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年07月22日</a>
-            <a><i class="nexmoefont icon-areachart"></i>184 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>181 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
         <article>
             
                 <h1 id="歌曲介绍"><a href="#歌曲介绍" class="headerlink" title="歌曲介绍"></a>歌曲介绍</h1><p>《超級瑪利歐 奧德賽》主題曲《Jump Up, Super Star！》由久保直人編曲、鈴木伸嘉填詞、英文版歌詞由Rob Tunstall填詞；歌曲由美國女歌手、配音演員<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E5%87%AF%E7%89%B9%C2%B7%E5%B8%8C%E9%87%91%E6%96%AF&action=edit&redlink=1">凱特·希金斯</a>和日本歌手向原愛海分別演唱英文版與日語版。主題曲充滿40-50年代<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%A8%82%E9%9A%8A">大樂隊</a>風格的輕快曲風。單曲於2017年10月20日在蘋果<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ITunes">iTunes</a>提供付費下載，並成功進入北美區的熱門前40名的名單中，達到第25位；在日本區和香港區甚至進入了前十名。</p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="MV"><a href="#MV" class="headerlink" title="MV"></a>MV</h1><video width="320" height="240" controls>  
-    <source src="https://drive.redball1017.ga/Blog/Media/Jump%20Up,Super%20Star.mp4" type="video/mp4">   
-    <object data="movie.mp4" width="854" height="480">    
-        <embed src="movie.swf" width="854" height="480">  
-    </object> 
-</video>
-上面这个建议下载后观看,如果想要在线观看,请观看下面的视频
-
-<video width="320" height="240" controls>  
-    <source src="https://drive.redball1017.ga/Blog/Media/Jump%20Up,Super%20Star.mkv" type="video/mp4">   
-    <object data="movie.mp4" width="854" height="480">    
-        <embed src="movie.swf" width="854" height="480">  
-    </object> 
-</video>
-
             
         </article>
     </div>
@@ -394,27 +272,13 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年07月17日</a>
-            <a><i class="nexmoefont icon-areachart"></i>391 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>388 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
         <article>
             
                 <h1 id="什么是Windows-预览体验计划"><a href="#什么是Windows-预览体验计划" class="headerlink" title="什么是Windows 预览体验计划?"></a>什么是Windows 预览体验计划?</h1><p>Windows预览体验计划(Windows Insider Preview,下文简称WIP)就是Windows测试版发布的渠道,有分Beta版和Dev版,如何加入我等一下再说.现在让我说一下这两个版本它们各自有什么有缺点吧!</p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h2 id="Beta版"><a href="#Beta版" class="headerlink" title="Beta版"></a>Beta版</h2><p>看名字就知道时测试版,适合早期用户,与Dev渠道版本相比,这些Windows版本的可靠性更高,且更新有Microsoft验证.</p>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>稳定性强,可靠性高,Bug相较于Dev版会少很多</p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>相较于Dev版本,它更新的时间会更晚</p>
-<h2 id="Dev版"><a href="#Dev版" class="headerlink" title="Dev版"></a>Dev版</h2><p>全称为develop版,意为开发版,适合高度技术性用户,率先使用最新代码在开发周期中访问最新Windows版本,将会存在些不足之处与低稳定性</p>
-<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><p>更新早</p>
-<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><p>稳定性低,兼容性低</p>
-<h1 id="如何加入Windows-预览体验计划"><a href="#如何加入Windows-预览体验计划" class="headerlink" title="如何加入Windows 预览体验计划?"></a>如何加入Windows 预览体验计划?</h1><p>首先打开你的电脑设置,然后点击”Windows 更新”项,然后点击左边的”Windows 预览体验计划”.然后点击立即加入,填好相关信息就完成啦!</p>
-<h1 id="WIP-安装映像ISO下载"><a href="#WIP-安装映像ISO下载" class="headerlink" title="WIP 安装映像ISO下载"></a>WIP 安装映像ISO下载</h1><p>以下文件均来自Insider.windows.com(有些也来自非官方发布,例如Windows 11 ISO泄露版)</p>
-<p>20210717编辑:注:目前Windows 11 WIP版仅支持通过Windows 更新来安装.</p>
-<h2 id="Windows-10-Insider-Preview-21354-Dev"><a href="#Windows-10-Insider-Preview-21354-Dev" class="headerlink" title="Windows 10 Insider Preview 21354(Dev)"></a>Windows 10 Insider Preview 21354(Dev)</h2><p><a target="_blank" rel="noopener" href="https://drive.redball1017.ga/Blog/download/Windows10_InsiderPreview_Client_x64_zh-cn_21354_2.iso">点我下载</a></p>
-<h2 id="Windows-11-Insider-Preview-10-0-22000-65-Dev"><a href="#Windows-11-Insider-Preview-10-0-22000-65-Dev" class="headerlink" title="Windows 11 Insider Preview 10.0.22000.65(Dev)"></a>Windows 11 Insider Preview 10.0.22000.65(Dev)</h2><p>注:自提取转ISO文件,不保证可以引导,但里面的setup.exe可以用</p>
-<p><a target="_blank" rel="noopener" href="https://drive.redball1017.ga/Blog/download/Windows%2011%20Insider%20Preview%2010.0.22000.65%20(co_release)%20amd64.iso">点我下载</a></p>
-
             
         </article>
     </div>
@@ -431,7 +295,7 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年06月12日</a>
-            <a><i class="nexmoefont icon-areachart"></i>234 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>231 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
@@ -441,21 +305,6 @@
 <p>2.一个Glitch账号</p>
 <p>3.一个Cloudflare账号</p>
 <p>4.一个域名</p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>首先打开<a target="_blank" rel="noopener" href="https://glitch.com/">Glitch官网</a>。然后登录你的Glitch账号。然后点击右上角头像旁边的”New Project”。然后再点击Import From Github</p>
-<p><img src="https://drive.redball1017.ga/blog/image/make-oneindex-by-Glitch/image1.jpg"></p>
-<p><img src="https://drive.redball1017.ga/blog/image/make-oneindex-by-Glitch/image2.jpg"></p>
-<p>然后在弹出的对话框中输入”<a target="_blank" rel="noopener" href="https://github.com/qkqpttgf/OneManager-php&quot;%E7%84%B6%E5%90%8E%E7%82%B9%E5%87%BB%E7%A1%AE%E5%AE%9A">https://github.com/qkqpttgf/OneManager-php&quot;然后点击确定</a></p>
-<p><img src="https://drive.redball1017.ga/blog/image/make-oneindex-by-Glitch/image3.jpg"></p>
-<p>若你想自定义域名，你需要先点击左下角的Tools，然后在弹出的方框内选择”Custom Domains”</p>
-<p><img src="https://drive.redball1017.ga/blog/image/make-oneindex-by-Glitch/image4.jpg"></p>
-<p>然后在输入框内输入你想要的域名然后点击下面的Add Domains</p>
-<p><img src="http://drive.redball1017.ga/blog/image/make-oneindex-by-Glitch/image5.jpg"></p>
-<p>然后到你的DNS提供商那里添加CNAME记录，值填glitch.edgeapp.net</p>
-<p><img src="https://drive.redball1017.ga/blog/image/make-oneindex-by-Glitch/image6.jpg"></p>
-<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>首先我们要获取网址。（如果是已经自定义完网址的请忽略）。首先我们要点及左上角的Share。在弹出的窗口中复制Live site，这个就是网址了。</p>
-<p>安装过程略。</p>
-
             
         </article>
     </div>
@@ -472,7 +321,7 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年06月05日</a>
-            <a><i class="nexmoefont icon-areachart"></i>325 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>322 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
@@ -481,26 +330,6 @@
                 <h1 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h1><p>本飞机场为博主自搭建，标注[free]或[免费]的是完全</p>
 <p>免费节点。目前由于经济原因只有美国节点可用，如果你们可以捐赠我的话以后就可以出现更多地区的免费节点了</p>
 <p><a target="_blank" rel="noopener" href="https://drive.redball1017.ga/blog/ssr/v2ray">订阅链接</a></p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>首先我们要先安装v2ray翻墙软件。常见的有<a target="_blank" rel="noopener" href="https://github.com/v2fly/v2ray-core/releases/tag/v4.39.2">V2ray</a>,<a target="_blank" rel="noopener" href="https://github.com/Qv2ray/Qv2ray/releases">QV2Ray</a>等。那我们就不演示安装的过程了。直接添加订阅。</p>
-<h2 id="QV2Ray"><a href="#QV2Ray" class="headerlink" title="QV2Ray"></a>QV2Ray</h2><h3 id="文本教程"><a href="#文本教程" class="headerlink" title="文本教程"></a>文本教程</h3><p>打开QV2ray主页面，然后点击左侧下方的分组</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/free-v2ray/image1.jpg"></p>
-<p>然后在新的窗口内点击左侧下方左边的按钮(右边的是删除按钮)</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/free-v2ray/image2.jpg"></p>
-<p>这样，一个新的分组就创建完成了。现在，我们要把这个分组变成一个订阅分组。首先，分组名称填你喜欢的，然后点击订阅设置，然后勾选“此分组是一个订阅”订阅地址填<a target="_blank" rel="noopener" href="https://drive.redball1017.ga/ssr/v2ray">https://drive.redball1017.ga/ssr/v2ray</a> .提醒间隔建议设置成1.00天。</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/free-v2ray/image3.jpg"></p>
-<p>然后再点更新订阅。等待更新完成后。关闭”组编辑器”窗口就可以看到左侧出现我们刚刚添加的订阅了。</p>
-<p><img src="https://drive.redball1017.ga/Blog/image/free-v2ray/image4.jpg"></p>
-<h3 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a>视频教程</h3><video width="320" height="240" controls>  
-    <source src="https://drive.redball1017.ga/Blog/Media/free-v2ray/QV2ray-toturial.mp4" type="video/mp4">   
-    <object data="movie.mp4" width="320" height="240">    
-        <embed src="movie.swf" width="320" height="240">  
-    </object> 
-</video>
-
-<h1 id="赞助-支持我"><a href="#赞助-支持我" class="headerlink" title="赞助/支持我"></a>赞助/支持我</h1><p>您现在可以通过微信，支付宝来赞助/支持我</p>
-<img src="https://drive.redball1017.ga/Blog/image/donateme-wechat.png" style="zoom: 50%;" />
-
             
         </article>
     </div>
@@ -517,21 +346,13 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年05月22日</a>
-            <a><i class="nexmoefont icon-areachart"></i>16 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>13 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
         <article>
             
                 <h1 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接"></a>下载链接</h1><p><a target="_blank" rel="noopener" href="https://drive.redball1017.ga/download/Super%20Mario%203D%20World%20Wii%20U%E4%B8%AD%E6%96%87%E8%A1%A5%E4%B8%81.zip">点我下载</a></p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="汉化后图片"><a href="#汉化后图片" class="headerlink" title="汉化后图片"></a>汉化后图片</h1><p><img src="https://drive.redball1017.ga/blogimages/images/Super-Mario-3D-World-wiiU-Chinese/image1.jpg"></p>
-<p><img src="https://drive.redball1017.ga/blogimages/images/Super-Mario-3D-World-wiiU-Chinese/image2.jpg"></p>
-<p><img src="https://drive.redball1017.ga/blogimages/images/Super-Mario-3D-World-wiiU-Chinese/image3.jpg"></p>
-<p><img src="https://drive.redball1017.ga/blogimages/images/Super-Mario-3D-World-wiiU-Chinese/image4.jpg"></p>
-<p><img src="https://drive.redball1017.ga/blogimages/images/Super-Mario-3D-World-wiiU-Chinese/image5.jpg"></p>
-<p><img src="https://drive.redball1017.ga/blogimages/images/Super-Mario-3D-World-wiiU-Chinese/image6.jpg"></p>
-
             
         </article>
     </div>
@@ -548,7 +369,7 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年05月02日</a>
-            <a><i class="nexmoefont icon-areachart"></i>542 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>539 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
         </div>
 
@@ -556,27 +377,6 @@
             
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>先放一个效果图给大家看</p>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="https://drive.redball1017.ga/blogimages/images/creat-a-v2ray-for-you/image1.jpg" alt="免费的能这样已经很不错了" class="lazyload"></p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="第一步-注册Heroku账户"><a href="#第一步-注册Heroku账户" class="headerlink" title="第一步:注册Heroku账户"></a>第一步:注册Heroku账户</h2><p><a target="_blank" rel="noopener" href="https://signup.heroku.com/">点我注册</a> 信息如图所示</p>
-<p><img src="https://drive.redball1017.ga/blogimages/images/creat-a-v2ray-for-you/image2.jpg"></p>
-<h2 id="第二步-配置v2ray"><a href="#第二步-配置v2ray" class="headerlink" title="第二步:配置v2ray"></a>第二步:配置v2ray</h2><p><a target="_blank" rel="noopener" href="https://dashboard.heroku.com/new?template=https://github.com/bclswl0827/v2ray-heroku"><img data-fancybox="gallery" data-sizes="auto" data-src="https://www.herokucdn.com/deploy/button.png" alt="Deploy" class="lazyload"></a> 点击这个按钮然后以如图所示的设置即可。<a target="_blank" rel="noopener" href="https://www.uuidgenerator.net/version4">点我生成UUID</a>(注意保存这个UUID)然后点击Deploy App，然后等待一会，出现Manage App的时候就表示成功了。然后试连接(地址是”你的App Name,herokuapp.com”,端口443,Alter ID为64,协议为WS,跳过TLS证书验证)看看（Ping延迟Ping不出来属正常现象）</p>
-<p><img src="https://drive.redball1017.ga/blogimages/images/creat-a-v2ray-for-you/image3.jpg"></p>
-<h2 id="第三步-加速V2ray"><a href="#第三步-加速V2ray" class="headerlink" title="第三步:加速V2ray"></a>第三步:加速V2ray</h2><p>链接上去后速度可能不太乐观，你可以使用Cloudflare的免费CDN加速来解决这一回事。</p>
-<p>注册Cloudflare账号略</p>
-<h3 id="第一小步-创建Worker"><a href="#第一小步-创建Worker" class="headerlink" title="第一小步:创建Worker"></a>第一小步:创建Worker</h3><p>登录Cloudflare后，点击右边的Worker,然后点击上方的创建Worker，然后把以下代码粘贴到代码栏，然后点击下方的保存并部署即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(</span><br><span class="line">    &quot;fetch&quot;, event &#x3D;&gt; &#123;</span><br><span class="line">        let url &#x3D; new URL(event.request.url);</span><br><span class="line">        url.hostname &#x3D; &quot;粘贴v2ray地址&quot;;</span><br><span class="line">        let request &#x3D; new Request(url, event.request);</span><br><span class="line">        event.respondWith(</span><br><span class="line">            fetch(request)</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h3 id="第二小步-加速"><a href="#第二小步-加速" class="headerlink" title="第二小步:加速"></a>第二小步:加速</h3><p>加速v2ray的前提是你要有一个属于自己的域名并且已经托管到Cloudflare了</p>
-<p>登录进cloudflare后，点击你的域名，然后再点击上边的Worker，然后点击添加路由.路由栏里填你想分配给你这个Worker的域名，格式为”example.域名/*”example替换成你想填的二级域名，域名替换成你的域名。然后点击保存即可<img src="https://drive.redball1017.ga/blogimages/images/creat-a-v2ray-for-you/image4.jpg"></p>
-<p>然后点击上边的DNS，然后点击”添加记录”。名称为你刚刚填写的二级域名。IP为你填写的Cloudflare CDN IP。（高速IP我会放在最后）然后点击保存即可(注意:把代理状态调整为仅限DNS，否则会导致二次加速减慢速度)<img src="https://drive.redball1017.ga/blogimages/images/creat-a-v2ray-for-you/image5.jpg"></p>
-<p>最后记得把v2ray的地址换成你刚刚给Worker分配的网址即可</p>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>最后放出高速IP范围</p>
-<p>162.159.208.4-162.159.208.103</p>
-<p>162.159.209.4-162.159.209.103</p>
-<p>162.159.210.4-162.159.210.103</p>
-<p>162.159.211.4-162.159.211.103</p>
-<p>1.0.0.0-1.0.0.999</p>
-
             
         </article>
     </div>
@@ -636,7 +436,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1629259193719"></script>
+<script src="/js/app.js?v=1629259527896"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

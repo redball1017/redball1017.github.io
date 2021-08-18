@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1629259193729">
+  <link rel="stylesheet" href="/css/style.css?v=1629259527907">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -185,65 +185,6 @@
         <article>
             
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>把Onedrive映射到本地磁盘是为了节省空间，因为Onedrive自带的同步功能太烂了，看个视频都要等下好了才可以看(磁盘占用太大)，根本不能在线看(在线看只要缓存没看的部分，看了的部分会自动删除，超节省磁盘空间)。只要用了我这种方法，把Onedrive映射到本地磁盘上，就可以大大减少磁盘占用了!</p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="获取Refresh-Token"><a href="#获取Refresh-Token" class="headerlink" title="获取Refresh_Token"></a>获取Refresh_Token</h2><p>首先需要下载<a target="_blank" rel="noopener" href="https://rclone.org/downloads/">rclone</a>(如果下载速度慢可以试试这个<a target="_blank" rel="noopener" href="https://drive.redball1017.ga/blog/download/rclone-release/v1.56.0/">链接</a>，里面有很多文件，但你只需要下载适合你系统的就可以了。文件格式是“rclone-版本号-你的系统-架构”，其中，32位是386,64位是amd64，比如64位Windows就是rclone-版本号-windows-amd64)</p>
-<p>然后把里面的文件解压到你喜欢的地方，比如我就是解压在桌面上。</p>
-<p>然后打开解压出来的rclone文件夹。</p>
-<p>然后在文件夹内打开cmd(按住Shift和右键，选择在此打开命令窗口)，Linux是终端，然后输入</p>
-<p><code>rclone authorize &quot;onedrive&quot;</code></p>
-<p>这一步是为了获取MS的Refresh_Token。然后在弹出来的浏览器窗口中选择账户(这个账户的Onedrive将会被映射到本地磁盘当中)然后我们要代表组织同意，然后点”接受”(企业版和教育版才有这个为问题)</p>
-<p><img src="https://drive.redball1017.ga/blog/image/od-localdrive/image1.png"></p>
-<p>个人版会显示“讓此應用程式存取您的資訊嗎？”，这时我们点”是”即可</p>
-<p><img src="https://drive.redball1017.ga/blog/image/od-localdrive/image2.png"></p>
-<p>然后出现“Success!”之后返回cmd，复制如图高亮(也就是{“access_token”: 一直到”}”的一段)的这一段即可</p>
-<p><img src="https://drive.redball1017.ga/blog/image/od-localdrive/image3.png"></p>
-<h2 id="新建配置"><a href="#新建配置" class="headerlink" title="新建配置"></a>新建配置</h2><p>输入 <code>rclone config</code>  然后输入n</p>
-<p><code>e) Edit existing remote n) New remote d) Delete remote r) Rename remote c) Copy remote s) Set configuration password q) Quit config e/n/d/r/c/s/q&gt;n    #这里输入n</code></p>
-<p>然后在 <code>name&gt;</code>的内容随便填，后面要作为config_name(即配置名)使用。</p>
-<p>然后在 <code>Storage</code>后面输入onedrive</p>
-<p><code>Type of storage to configure. Enter a string value. Press Enter for the default (&quot;&quot;). Choose a number from below, or type in your own value  1 / 1Fichier    \ &quot;fichier&quot;  2 / Alias for an existing remote    \ &quot;alias&quot;  3 / Amazon Drive    \ &quot;amazon cloud drive&quot;  4 / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Minio, SeaweedFS, and Tencent COS    \ &quot;s3&quot;  5 / Backblaze B2    \ &quot;b2&quot;  6 / Box    \ &quot;box&quot;  7 / Cache a remote    \ &quot;cache&quot;  8 / Citrix Sharefile    \ &quot;sharefile&quot;  9 / Compress a remote    \ &quot;compress&quot; 10 / Dropbox    \ &quot;dropbox&quot; 11 / Encrypt/Decrypt a remote    \ &quot;crypt&quot; 12 / Enterprise File Fabric    \ &quot;filefabric&quot; 13 / FTP Connection    \ &quot;ftp&quot; 14 / Google Cloud Storage (this is not Google Drive)    \ &quot;google cloud storage&quot; 15 / Google Drive    \ &quot;drive&quot; 16 / Google Photos    \ &quot;google photos&quot; 17 / Hadoop distributed file system    \ &quot;hdfs&quot; 18 / Hubic    \ &quot;hubic&quot; 19 / In memory object storage system.    \ &quot;memory&quot; 20 / Jottacloud    \ &quot;jottacloud&quot; 21 / Koofr    \ &quot;koofr&quot; 22 / Local Disk    \ &quot;local&quot; 23 / Mail.ru Cloud    \ &quot;mailru&quot; 24 / Mega    \ &quot;mega&quot; 25 / Microsoft Azure Blob Storage    \ &quot;azureblob&quot; 26 / Microsoft OneDrive    \ &quot;onedrive&quot; 27 / OpenDrive    \ &quot;opendrive&quot; 28 / OpenStack Swift (Rackspace Cloud Files, Memset Memstore, OVH)    \ &quot;swift&quot; 29 / Pcloud    \ &quot;pcloud&quot; 30 / Put.io    \ &quot;putio&quot; 31 / QingCloud Object Storage    \ &quot;qingstor&quot; 32 / SSH/SFTP Connection    \ &quot;sftp&quot; 33 / Sugarsync    \ &quot;sugarsync&quot; 34 / Tardigrade Decentralized Cloud Storage    \ &quot;tardigrade&quot; 35 / Transparently chunk/split large files    \ &quot;chunker&quot; 36 / Union merges the contents of several upstream fs    \ &quot;union&quot; 37 / Uptobox    \ &quot;uptobox&quot; 38 / Webdav    \ &quot;webdav&quot; 39 / Yandex Disk    \ &quot;yandex&quot; 40 / Zoho    \ &quot;zoho&quot; 41 / http Connection    \ &quot;http&quot; 42 / premiumize.me    \ &quot;premiumizeme&quot; 43 / seafile    \ &quot;seafile&quot; Storage&gt;onedrive    #输入onedrive</code></p>
-<p>然后Client_id我们用默认的就可以了，即按Enter键</p>
-<p><code>OAuth Client Id Leave blank normally. Enter a string value. Press Enter for the default (&quot;&quot;). client_id&gt;    #按Enter键继续</code></p>
-<p>然后Client_secret我们也是用默认的，即也是按Enter键</p>
-<p><code>OAuth Client Secret Leave blank normally. Enter a string value. Press Enter for the default (&quot;&quot;). client_secret&gt;    #按Enter键继续</code></p>
-<p>然后region，国际版填global,中国世纪互联用户填cn</p>
-<p><code>Choose national cloud region for OneDrive. Enter a string value. Press Enter for the default (&quot;global&quot;). Choose a number from below, or type in your own value  1 / Microsoft Cloud Global    \ &quot;global&quot;  2 / Microsoft Cloud for US Government    \ &quot;us&quot;  3 / Microsoft Cloud Germany    \ &quot;de&quot;  4 / Azure and Office 365 operated by 21Vianet in China    \ &quot;cn&quot; region&gt;    #国际版填global，中国世纪互联填cn</code></p>
-<p>然后在 <code>y/n </code>后面输入n或按Enter键</p>
-<p><code>Edit advanced config? y) Yes n) No (default) y/n&gt;n    #输入n或按Enter键</code></p>
-<p>然后我们输入y或按Enter键</p>
-<p>`Use auto config?</p>
-<ul>
-<li><p>Say Y if not sure</p>
-</li>
-<li><p>Say N if you are working on a remote or headless machine</p>
-<p>y) Yes (default)<br>n) No<br>y/n&gt;y    输入y或按Enter键`</p>
-<p>然后他可能会让你再次登录MS账户，这时登录即可</p>
-<p>然后我们在 <code>config_type&gt;</code>后面输入onedrive</p>
-<p><code> 1 / OneDrive Personal or Business    \ &quot;onedrive&quot;  2 / Root Sharepoint site    \ &quot;sharepoint&quot;  3 / Sharepoint site name or URL (e.g. mysite or https://contoso.sharepoint.com/sites/mysite)    \ &quot;url&quot;  4 / Search for a Sharepoint site    \ &quot;search&quot;  5 / Type in driveID (advanced)    \ &quot;driveid&quot;  6 / Type in SiteID (advanced)    \ &quot;siteid&quot;  7 / Sharepoint server-relative path (advanced, e.g. /teams/hr)    \ &quot;path&quot; config_type&gt;onedrive    #输入onedrive</code></p>
-<p>然后我们在 <code>y/n&gt;</code>后面输入或者按Enter键</p>
-<p>`Drive OK?</p>
-<p>Found drive “root” of type “business”<br>URL: <a target="_blank" rel="noopener" href="https://xxx-my.sharepoint.com/personal/xxx_xxx_onmicrosoft_com/Documents">https://xxx-my.sharepoint.com/personal/xxx_xxx_onmicrosoft_com/Documents</a></p>
-<p>y) Yes (default)<br>n) No<br>y/n&gt;y    #输入y或按Enter键`</p>
-<p>然后我们在 <code>y/e/d&gt;</code>后面输入y</p>
-<p>`[example]<br>type = onedrive<br>token = {“access_token”:”xxxxx”}<br>drive_id = xxxx</p>
-<h2 id="drive-type-business"><a href="#drive-type-business" class="headerlink" title="drive_type = business"></a>drive_type = business</h2><p>y) Yes this is OK (default)<br>e) Edit this remote<br>d) Delete this remote<br>y/e/d&gt;y    输入y`</p>
-<p>然后我们输入q退出rclone</p>
-<p><code>e) Edit existing remote n) New remote d) Delete remote r) Rename remote c) Copy remote s) Set configuration password q) Quit config e/n/d/r/c/s/q&gt; q    #输入q退出rclone</code></p>
-<p>然后我们输入以下命令来挂载Onedrive</p>
-</li>
-</ul>
-<p>Windows用户</p>
-<p><code>rclone mount config_name: drive_letter: --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --vfs-cache-mode writes</code></p>
-<p>config_name就是你一开始输入的配置名,drive_letter就是要挂载在哪个盘，不要输入现在已有的盘，比如C盘,D盘</p>
-<p>Linux用户:</p>
-<p><code>rclone mount DriveName: LocalFolder --umask 0000 --default-permissions --allow-non-empty --allow-other --transfers 1 --buffer-size 64M --low-level-retries 200 &amp;</code> </p>
-<p>DriveName就是你一开始输入的配置名，LocalFolder就是你想挂载到哪个本地文件夹内(要有绝对路径!!)</p>
-<h2 id="Windows设置开机自启，cmd后台运行"><a href="#Windows设置开机自启，cmd后台运行" class="headerlink" title="Windows设置开机自启，cmd后台运行"></a>Windows设置开机自启，cmd后台运行</h2><p>首先我们按Windows微标键(即位于X键下面，Fn和左Alt之间的按键)+R键调出运行窗口，然后输入<code>%appdata%\Microsoft\Windows\Start Menu\Programs\Startup</code>进入启动文件夹</p>
-<p><img src="https://drive.redball1017.ga/blog/image/od-localdrive/image4.png"></p>
-<p>然后在这里面新建一个.txt文件然后在里面输入</p>
-<p><code>if &quot;%1&quot;==&quot;hide&quot; goto CmdBegin start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;&quot;&quot;%~0&quot;&quot; hide&quot;,0)(window.close)&amp;&amp;exit :CmdBegin cd &quot;rcloneFolder&quot; rclone mount config_name: Drive_letter: --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --vfs-cache-mode writes</code></p>
-<p><code>rcloneFolder</code>是指Rclone所在的文件夹，要完整，例如C:/example/rclone 。<code>config_name</code>就是你一开始输入的配置名，<code>Drive_letter</code>就是你想挂载到哪个盘，不要输入现在已有的盘，比如C盘,D盘，然后保存。最后把.txt重命名为.bat(记得打开显示文件扩展名!!!!!!)</p>
-
             
         </article>
     </div>
@@ -260,7 +201,7 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow-fill">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年08月08日</a>
-            <a><i class="nexmoefont icon-areachart"></i>232 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>229 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
@@ -268,20 +209,6 @@
             
                 <h1 id="资源下载"><a href="#资源下载" class="headerlink" title="资源下载"></a>资源下载</h1><p><a target="_blank" rel="noopener" href="https://drive.redball1017.ga/blog/download/free-minecraft-uwp.zip">点我下载</a></p>
 <p>到Microsoft Store 下载并安装Minecraft For WIndows 10试用版</p>
-<p><strong><code>&lt;!--more--&gt;</code></strong></p>
-<h1 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h1><p>系统:Windows 10</p>
-<p>版本号必须高于1909</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>首先我们先下载资源</p>
-<p>然后解压zip压缩包后进入文件夹”获取管理权限”,然后双击”安装.reg”.这样你的右键菜单就会有一个选项叫做”获取管理权限”.安装这个功能是因为我们等下要替换系统文件,你没安装会提示你权限不足.</p>
-<p><img src="https://drive.redball1017.ga/blog/image/free-minecraft-uwp/image1.png"></p>
-<p><img src="https://drive.redball1017.ga/blog/image/free-minecraft-uwp/image2.png"></p>
-<p>然后我们分别获取以下两个文件的管理权限</p>
-<p>你的系统盘\Windows\System32 里面的Windows.ApplicationModel.Store.dll</p>
-<p>你的系统盘\Windows\SysWOW64 里面的Windows.ApplicationModel.Store.dll</p>
-<p>然后把解压出来的System32和SysWOW64复制粘贴到”你的系统盘\Windows里面”</p>
-<p>然后打开Minecraft For Windows 10即可游玩正版</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>阻止Minecraft向Microsoft Store索要正版信息</p>
-
             
         </article>
     </div>
@@ -309,7 +236,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1629259193731"></script>
+<script src="/js/app.js?v=1629259527908"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
